@@ -10,6 +10,16 @@ from .agent_tools.agent_tools import (
 )
 from .llm.llm_model import MODEL, llm_model
 
+from dotenv import load_dotenv
+load_dotenv()
+
+import vertexai
+from vertexai.generative_models import GenerativeModel
+import os 
+GOOGLE_CLOUD_PROJECT = os.getenv("GCP_MAIN_PROJECT_ID")
+GOOGLE_CLOUD_LOCATION = os.getenv("GOOGLE_CLOUD_LOCATION","us-central1")
+
+vertexai.init(project=GOOGLE_CLOUD_PROJECT, location=GOOGLE_CLOUD_LOCATION)
 
 def get_current_date() -> str:
     """Gets the current date.

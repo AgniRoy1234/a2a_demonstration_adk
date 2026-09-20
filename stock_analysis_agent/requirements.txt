@@ -1,0 +1,9 @@
+fastmcp
+a2a-server
+a2a-sdk
+google-adk
+python-dotenv
+yfinance
+uvicorn
+pandas
+google-cloud-aiplatform

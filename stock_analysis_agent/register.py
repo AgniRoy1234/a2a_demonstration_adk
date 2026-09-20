@@ -25,7 +25,7 @@ load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 SERVICE_ID = "stock-performance-agent"  # Must match the service_id in agent_card.py
 PROJECT = os.getenv("GCP_MAIN_PROJECT_ID")
-LOCATION = "global"
+LOCATION = "us-central1"  # Must match the location in agent_card.py
 HOST = "localhost"
 PORT = int(os.getenv("PORT", 8001))
 

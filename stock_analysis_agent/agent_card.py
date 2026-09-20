@@ -18,7 +18,7 @@ def build_agent_card(host: str, port: int) -> AgentCard:
             AgentInterface(
                 url=f"http://{host}:{port}/",
                 protocol_binding="JSONRPC",
-                protocol_version="1.0",  # Updated to match A2A v1.0 schema
+                protocol_version="1.0.0",  # Updated to match A2A v1.0 schema
             )
         ],
         default_input_modes=["text/plain"],
