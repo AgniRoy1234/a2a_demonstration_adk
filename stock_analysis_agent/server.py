@@ -15,7 +15,7 @@ from stock_analysis_agent.agent_card import build_agent_card
 
 def main():
     host = "localhost"
-    port = os.getenv("PORT", 8001)  # Use the PORT from .env or default to 8001
+    port = int(os.getenv("PORT", 8001)) 
 
     app = to_a2a(
         root_agent,
