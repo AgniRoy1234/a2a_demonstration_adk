@@ -14,14 +14,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 import os 
-# 1. Explicitly force Vertex AI flag to FALSE / 0
+# # 1. Explicitly force Vertex AI flag to FALSE / 0
 os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "0"
 os.environ["GOOGLE_GENAI_USE_ENTERPRISE"] = "0"
 
-# 2. IMPORTANT: Delete GCP project/location variables so the SDK doesn't default to Vertex AI
-os.environ.pop("GOOGLE_CLOUD_PROJECT", None)
-os.environ.pop("GOOGLE_CLOUD_LOCATION", None)
-os.environ.pop("GCP_MAIN_PROJECT_ID", None)
+# # 2. IMPORTANT: Delete GCP project/location variables so the SDK doesn't default to Vertex AI
+# os.environ.pop("GOOGLE_CLOUD_PROJECT", None)
+# os.environ.pop("GOOGLE_CLOUD_LOCATION", None)
+# os.environ.pop("GCP_MAIN_PROJECT_ID", None)
 
 
 def get_current_date() -> str:
