@@ -8,18 +8,18 @@ from .agent_tools.agent_tools import (
     calculate_percentage_change,
     get_stock_price_on_dates,
 )
-from .llm.llm_model import MODEL, llm_model
+from .llm.llm_model import MODEL_HIGHER, MODEL_LOWER
 
 from dotenv import load_dotenv
 load_dotenv()
 
-import vertexai
-from vertexai.generative_models import GenerativeModel
+# import vertexai
+# from vertexai.generative_models import GenerativeModel
 import os 
 GOOGLE_CLOUD_PROJECT = os.getenv("GCP_MAIN_PROJECT_ID")
-GOOGLE_CLOUD_LOCATION = os.getenv("GOOGLE_CLOUD_LOCATION","us-central1")
+GOOGLE_CLOUD_LOCATION = "us-central1"
 
-vertexai.init(project=GOOGLE_CLOUD_PROJECT, location=GOOGLE_CLOUD_LOCATION)
+# vertexai.init(project=GOOGLE_CLOUD_PROJECT, location=GOOGLE_CLOUD_LOCATION)
 
 def get_current_date() -> str:
     """Gets the current date.
@@ -34,7 +34,7 @@ def get_current_date() -> str:
 # 1. First Agent: Retrieves current date (if needed) and fetches stock prices
 price_retrieval_agent = LlmAgent(
     name="price_retrieval_agent",
-    model=MODEL,
+    model=MODEL_HIGHER,
     description="An agent that determines the correct dates and fetches stock prices.",
     instruction=(
         "You are a data retrieval specialist. Your goal is to determine the correct start and end dates "
@@ -63,7 +63,7 @@ price_retrieval_agent = LlmAgent(
 # 2. Second Agent: Calculates the percentage change from the retrieved prices
 calculation_agent = LlmAgent(
     name="calculation_agent",
-    model=MODEL,
+    model=MODEL_LOWER,
     description=(
         "An agent that calculates the percentage change from stock price data."
     ),
