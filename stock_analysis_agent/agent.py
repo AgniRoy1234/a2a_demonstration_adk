@@ -13,13 +13,16 @@ from .llm.llm_model import MODEL_HIGHER, MODEL_LOWER
 from dotenv import load_dotenv
 load_dotenv()
 
-# import vertexai
-# from vertexai.generative_models import GenerativeModel
 import os 
-GOOGLE_CLOUD_PROJECT = os.getenv("GCP_MAIN_PROJECT_ID")
-GOOGLE_CLOUD_LOCATION = "us-central1"
+# 1. Explicitly force Vertex AI flag to FALSE / 0
+os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "0"
+os.environ["GOOGLE_GENAI_USE_ENTERPRISE"] = "0"
 
-# vertexai.init(project=GOOGLE_CLOUD_PROJECT, location=GOOGLE_CLOUD_LOCATION)
+# 2. IMPORTANT: Delete GCP project/location variables so the SDK doesn't default to Vertex AI
+os.environ.pop("GOOGLE_CLOUD_PROJECT", None)
+os.environ.pop("GOOGLE_CLOUD_LOCATION", None)
+os.environ.pop("GCP_MAIN_PROJECT_ID", None)
+
 
 def get_current_date() -> str:
     """Gets the current date.
