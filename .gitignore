@@ -218,3 +218,5 @@ __marimo__/
 .streamlit/secrets.toml
 
 llm_callbacks.log
+
+agent_using_vertex_ai_and_callback/.adk/
