@@ -25,7 +25,9 @@ import os
 # os.environ["GOOGLE_CLOUD_PROJECT"] = os.getenv("GCP_PROJECT_ID")
 # os.environ["GOOGLE_CLOUD_REGION"] = os.getenv("GCP_REGION")
 
-# print(os.environ)
+# if os.environ["GOOGLE_CLOUD_API_KEY"]:
+#     print("Environment variable key set for Vertex AI:")
+#     print(os.environ["GOOGLE_CLOUD_API_KEY"])
 
 def get_current_date() -> str:
     """Gets the current date.
