@@ -2,6 +2,8 @@ import pandas as pd
 import yfinance as yf 
 
 from google.adk.tools.tool_context import ToolContext
+from google.adk.agents.callback_context import CallbackContext
+from google.adk.agents.context import Context
 
 from .tool_logs import log_toolcontext
 
@@ -71,7 +73,7 @@ def calculate_percentage_change(price_data, tool_context: ToolContext):
                 '2025-02-26': 171.93,
                 '2026-03-26': 280.92
             }
-         tool_context (ToolContext): The execution context managing state.
+         tool_context (ToolContext): The execution context managing state
 
     Returns:
         str: A formatted percentage increase or decrease string rounded to two decimal places 

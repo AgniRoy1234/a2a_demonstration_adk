@@ -15,6 +15,9 @@ from .callback_code.model_callback import (
     before_model_callback,
     after_model_callback)
 
+from .callback_code.tool_callback import (before_tool_callback,
+                                          after_tool_callback)
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -68,6 +71,8 @@ price_retrieval_agent = LlmAgent(
     output_key="stock_prices",
     before_model_callback=before_model_callback,
     after_model_callback=after_model_callback,
+    before_tool_callback=before_tool_callback,
+    after_tool_callback=after_tool_callback,
 )
 
 # 2. Second Agent: Calculates the percentage change from the retrieved prices
@@ -89,6 +94,8 @@ calculation_agent = LlmAgent(
     tools=[calculate_percentage_change],
     before_model_callback=before_model_callback,
     after_model_callback=after_model_callback,
+    before_tool_callback=before_tool_callback,
+    after_tool_callback=after_tool_callback,
 )
 
 # 3. Combine them into a Sequential Workflow
