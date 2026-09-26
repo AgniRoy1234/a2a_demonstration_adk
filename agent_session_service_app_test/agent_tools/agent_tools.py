@@ -3,8 +3,12 @@ import yfinance as yf
 
 from google.adk.tools.tool_context import ToolContext
 
+from .tool_logs import log_toolcontext
 
-def get_stock_price_on_dates(ticker: str, date_one: str, date_two: str):
+def get_stock_price_on_dates(ticker: str, 
+                             date_one: str, 
+                             date_two: str,
+                             tool_context: ToolContext):
     """
     Fetches the closing stock price for a given ticker on two specific dates.
 
@@ -12,11 +16,15 @@ def get_stock_price_on_dates(ticker: str, date_one: str, date_two: str):
         ticker (str): The stock ticker symbol (e.g., 'AAPL', 'MSFT').
         date_one (str): The first target date in 'YYYY-MM-DD' format.
         date_two (str): The second target date in 'YYYY-MM-DD' format.
+        tool_context (ToolContext): The execution context managing state.
 
     Returns:
         dict or str: A dictionary mapping the valid ISO date strings to their 
         respective closing price floats, or an error message if the data cannot be fetched.
     """
+
+    log_toolcontext(tool_context)
+
     dates = sorted([date_one, date_two])
     # Add buffer day because yfinance end date is exclusive
     end_buffer = (pd.to_datetime(dates[1]) + pd.Timedelta(days=1)).strftime('%Y-%m-%d')
@@ -51,7 +59,7 @@ def get_stock_price_on_dates(ticker: str, date_one: str, date_two: str):
     except Exception as e:
         return f"Error fetching data: {str(e)}"
 
-def calculate_percentage_change(price_data):
+def calculate_percentage_change(price_data, tool_context: ToolContext):
     """
     Computes the percentage change between two price points across specified dates.
 
@@ -63,11 +71,15 @@ def calculate_percentage_change(price_data):
                 '2025-02-26': 171.93,
                 '2026-03-26': 280.92
             }
+         tool_context (ToolContext): The execution context managing state.
 
     Returns:
         str: A formatted percentage increase or decrease string rounded to two decimal places 
         (e.g., '63.39%'), or an error message if the input format is invalid.
     """
+
+    log_toolcontext(tool_context)
+
     try:
         # Convert dictionary values or pandas series to a simple list of numbers
         if isinstance(price_data, dict):
