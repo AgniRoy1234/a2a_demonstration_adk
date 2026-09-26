@@ -14,7 +14,7 @@ def before_tool_callback(tool: BaseTool,
                          tool_context: ToolContext) -> Optional[Dict]:
 
     logger.info("Tool and args")
-    logger.info(tool)
+    # logger.info(tool)
     logger.info(args)
     pass 
 
@@ -23,6 +23,6 @@ def after_tool_callback(tool: BaseTool,
                         tool_context: ToolContext, 
                         tool_response: Dict):
     logger.info("Tool and args")
-    logger.info(tool)
+    # logger.info(tool)
     logger.info(args)
     pass 

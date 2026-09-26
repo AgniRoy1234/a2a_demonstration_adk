@@ -18,6 +18,11 @@ from .callback_code.model_callback import (
 from .callback_code.tool_callback import (before_tool_callback,
                                           after_tool_callback)
 
+from .callback_code.agent_callback import before_agent_callback_price_retrieval_agent
+
+from .agent_sqlite.create_agents_logs_table import create_database 
+create_database()
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -31,6 +36,9 @@ import os
 # if os.environ["GOOGLE_CLOUD_API_KEY"]:
 #     print("Environment variable key set for Vertex AI:")
 #     print(os.environ["GOOGLE_CLOUD_API_KEY"])
+
+SQLITE_DATABASE=os.getenv("SQLITE_DATABASE", "agent_logs.db")
+SQLITE_TABLE_NAME=os.getenv("SQLITE_TABLE_NAME",'agent_logs')
 
 def get_current_date() -> str:
     """Gets the current date.
@@ -73,6 +81,7 @@ price_retrieval_agent = LlmAgent(
     after_model_callback=after_model_callback,
     before_tool_callback=before_tool_callback,
     after_tool_callback=after_tool_callback,
+    before_agent_callback=before_agent_callback_price_retrieval_agent
 )
 
 # 2. Second Agent: Calculates the percentage change from the retrieved prices
