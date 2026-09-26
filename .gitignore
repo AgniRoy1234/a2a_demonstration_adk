@@ -221,3 +221,4 @@ llm_callbacks.log
 
 agent_using_vertex_ai_and_callback/.adk/
 */.adk/
+agent_logs.db
