@@ -5,7 +5,7 @@ from google.adk.tools.tool_context import ToolContext
 from google.adk.agents.callback_context import CallbackContext
 from google.adk.agents.context import Context
 
-from logging.logging import log_toolcontext
+from ..logging.logging import log_toolcontext
 
 def get_stock_price_on_dates(ticker: str, 
                              date_one: str, 

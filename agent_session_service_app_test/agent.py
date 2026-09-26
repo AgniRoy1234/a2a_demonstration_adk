@@ -18,7 +18,8 @@ from .callback_code.model_callback import (
 from .callback_code.tool_callback import (before_tool_callback,
                                           after_tool_callback)
 
-from .callback_code.agent_callback import before_agent_callback_price_retrieval_agent
+from .callback_code.agent_callback import (before_agent_callback_price_retrieval_agent,
+                                            before_agent_callback_calculation_agent)
 
 from .agent_sqlite.create_agents_logs_table import create_database 
 create_database()
@@ -105,6 +106,7 @@ calculation_agent = LlmAgent(
     after_model_callback=after_model_callback,
     before_tool_callback=before_tool_callback,
     after_tool_callback=after_tool_callback,
+    before_agent_callback=before_agent_callback_calculation_agent
 )
 
 # 3. Combine them into a Sequential Workflow

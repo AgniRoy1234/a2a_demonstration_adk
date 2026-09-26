@@ -4,10 +4,10 @@ from typing import Optional
 from google.adk.agents.callback_context import CallbackContext
 from google.genai import types 
 
-from agent_sqlite.session_service_queries import (execute_query,
+from ..agent_sqlite.session_service_queries import (execute_query,
                                                   fetch_query)
 
-from logging.logging import log_agentstate
+from ..logging.logging import log_agentstate
 
 import os
 from dotenv import load_dotenv
@@ -22,11 +22,17 @@ def before_agent_callback_price_retrieval_agent(callback_context: CallbackContex
      # Get the session state
     state = callback_context.state
 
+    # print("This is user id")
+    # print(callback_context.user_id)
+    # print(callback_context.session)
+    # print(callback_context.actions) 
+    # print(callback_context._state.)
+
     log_agentstate(callback_context)
 
     if "chat_id" not in state:
         now = datetime.now()
-        chat_id = now.strftime("%Y-%m-%d %H:%M:%S")
+        chat_id = now.strftime("%Y%m%d%H%M%S")
         
         state["chat_id"] = chat_id
         insert_query = f"""insert into {SQLITE_TABLE_NAME} (chat_id,agent_name) VALUES 
@@ -43,4 +49,33 @@ def before_agent_callback_price_retrieval_agent(callback_context: CallbackContex
 
     
 
+def before_agent_callback_calculation_agent(callback_context: CallbackContext) -> Optional[types.Content]:
+
+     # Get the session state
+    state = callback_context.state
+
+    # print("This is user id")
+    # print(callback_context.user_id)
+    # print(callback_context.session)
+    # print(callback_context.actions) 
+    # print(callback_context._state.)
+
+    log_agentstate(callback_context)
+
+    if "chat_id" not in state:
+        now = datetime.now()
+        chat_id = now.strftime("%Y%m%d%H%M%S")
+        
+        state["chat_id"] = chat_id
+        insert_query = f"""insert into {SQLITE_TABLE_NAME} (chat_id,agent_name) VALUES 
+        ('{chat_id}', 'calculation_agent') """ 
+        execute_query(insert_query)
+
+    else:
+        chat_id = state["chat_id"]
+        update_query = f"""update {SQLITE_TABLE_NAME} set agent_name = 'calculation_agent' 
+                where chat_id = '{chat_id}' """ 
+        execute_query(update_query) 
+
+    return None 
 
